@@ -1,15 +1,16 @@
 import ssrHandler from '../dist/ssr/server/server-entry.js';
 
-export default async function handler(req, res) {
-  console.log('REQ KEYS:', Object.keys(req));
-  console.log('REQ HEADERS:', req.headers);
-  try {
-    console.log('REQ:', JSON.stringify(req, null, 2));
-  } catch (e) {
-    console.log('REQ (no JSON):', req);
+function buildHeaders(rawHeaders) {
+  const headers = {};
+  for (let i = 0; i < rawHeaders.length; i += 2) {
+    headers[rawHeaders[i].toLowerCase()] = rawHeaders[i + 1];
   }
-  if (!req.headers) {
-    req.headers = {};
+  return headers;
+}
+
+export default async function handler(req, res) {
+  if (!req.headers && req.rawHeaders) {
+    req.headers = buildHeaders(req.rawHeaders);
   }
   await ssrHandler(req, res);
 }

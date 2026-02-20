@@ -1,11 +1,7 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npx quasar build -m ssr",
-  "functions": {
-    "api/server.js": {
-      "includeFiles": "dist/ssr/**"
-    }
-  },
+  "outputDirectory": "dist/ssr",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",

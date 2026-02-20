@@ -4,6 +4,9 @@ import pluginVue from 'eslint-plugin-vue';
 import pluginQuasar from '@quasar/app-vite/eslint';
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
 import prettierSkipFormatting from '@vue/eslint-config-prettier/skip-formatting';
+import { join } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 export default defineConfigWithVueTs(
   {
@@ -80,4 +83,11 @@ export default defineConfigWithVueTs(
   },
 
   prettierSkipFormatting,
+  {
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: dirname(fileURLToPath(import.meta.url)),
+      },
+    },
+  },
 );

@@ -1,6 +1,6 @@
-const { ssrProductionExport } = require('../dist/ssr/server/entry');
+import { ssrProductionExport } from '../dist/ssr/server/entry.js';
 
-module.exports = async (req, res) => {
-  const { handler } = ssrProductionExport;
-  await handler(req, res);
-};
+export default async function handler(req, res) {
+  const { handler: ssrHandler } = ssrProductionExport;
+  await ssrHandler(req, res);
+}

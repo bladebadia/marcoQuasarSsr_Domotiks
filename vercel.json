@@ -1,11 +1,17 @@
 {
-  "buildCommand": "npx quasar build -m ssr",
+  "buildCommand": "quasar build -m ssr",
   "outputDirectory": "dist/ssr",
-  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/api/server"
     }
-  ]
+  ],
+  "functions": {
+    "api/server.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "includeFiles": "dist/ssr/**"
+    }
+  }
 }
